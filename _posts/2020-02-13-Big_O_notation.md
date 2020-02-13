@@ -93,4 +93,4 @@ ps에서 자주 등장하는 시간복잡도는 다음과 같습니다.
 
 다음과 같은 이미지로 O(n), O(logn), O(n^2), O(n^3), O(n!)를 비교해 볼 수 있습니다.
 
-![compare](C:\Users\sean9\Documents\GitHub\sean9892.github.io\files\1_timecomplexity\compare.png)
+![시간복잡도 비교](https://i.imgur.com/FD67XMt.png)
