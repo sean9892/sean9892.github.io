@@ -1,5 +1,4 @@
 ---
-
 layout: post
 
 title: '[Basic] 완전탐색(Brute-Force)'
@@ -7,6 +6,7 @@ title: '[Basic] 완전탐색(Brute-Force)'
 date: 2020-02-28
 
 tag: [Basic]
+
 ---
 
 
