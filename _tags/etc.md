@@ -1,7 +1,0 @@
----
-
-name: etc
-
-title: etc
-
----
