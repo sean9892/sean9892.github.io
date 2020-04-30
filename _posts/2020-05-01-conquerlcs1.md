@@ -2,7 +2,7 @@
 title: "LCS 정복하기 (1/7)"
 date: 2020-05-01
 categories:
-- OJ
+- TUTORIAL
 tags:
 - LCS
 - DP
