@@ -36,7 +36,7 @@ DP로 생각해봅시다.
 
 로 정의하면 다음과 같은 점화식이 성립합니다.
 
-**DP [i] [j] = DP [i-1] [j-1]** *when A[i]==B[j]*
+**DP [i] [j] = DP [i-1] [j-1] + 1** *when A[i]==B[j]*
 
 **DP [i] [j] = max( DP [i-1] [j] , DP [i] [j-1] )** *otherwise*
 
