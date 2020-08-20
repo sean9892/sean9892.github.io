@@ -1,5 +1,5 @@
 ---
-title: "LCS 정복하기 (4/7)"
+title: "LCS 정복하기 4"
 date: 2020-05-15
 categories:
 - TUTORIAL
