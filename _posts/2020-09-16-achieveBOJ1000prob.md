@@ -1,5 +1,5 @@
 ---
-title:"백준 1000문제 달성"
+title: "백준 1000문제 달성"
 date:2020-09-16
 categories:
 - etc
