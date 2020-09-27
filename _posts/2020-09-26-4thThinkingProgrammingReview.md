@@ -7,6 +7,10 @@ tags:
 - etc
 ---
 
+제 4회 생각하는 프로그래밍 대회 Open Contest 후기
+
+
+
 ![result](https://user-images.githubusercontent.com/46587635/94336739-45817e80-0020-11eb-83ad-e000345bf463.png)
 
 딱히 열심히 할 생각이 없었는데 4등한 기념으로 리뷰글 씁니다.
