@@ -135,13 +135,13 @@ menu_icons:
   enable: true
   #KeyMapsToMenuItemKey: NameOfTheIconFromFontAwesome
   home: home
-  #about: user
-  #categories: th
-  #schedule: calendar
+  about: user
+  categories: th
+  schedule: calendar
   tags: tags
   archives: archive
   sitemap: sitemap
-  #commonweal: heartbeat
+  commonweal: heartbeat
 
 # ---------------------------------------------------------------
 # Scheme Settings
