@@ -89,8 +89,8 @@ function encrypt(password) {
 }
 
 gulp.task('firewall:encrypt', () => {
-  return gulp.src('_protected/*.*')
-    .pipe(encrypt('password'))
+  return gulp.src('_protected/2021-01-27-test_pwd.md')
+    .pipe(encrypt('pwd'))
     .pipe(gulp.dest('_posts'));
 });
 
