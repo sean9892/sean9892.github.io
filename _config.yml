@@ -357,6 +357,10 @@ highlight_theme: normal
 # Third Party Services Settings
 # ---------------------------------------------------------------
 
+# Protector
+collections:
+  protected:
+
 # MathJax Support
 mathjax:
   enable: true
