@@ -11,6 +11,21 @@
 
 <html class="{{ html_class | downcase }}" lang="{{ site.language }}">
 <head>
+  <style>
+    .rainbow {
+      background-color: white !important;
+       animation: rainbow 3s ease-in-out infinite !important;
+    }
+    @keyframes rainbow {
+       0% {color: #f8be00; !important text-shadow: 0 0 8px rgba(248,190,  0,0.5);}
+       14% {color: #ff0000; !important text-shadow: 0 0 8px rgba(255,  0,  0,0.5);}
+       28% {color: #ff009a; !important text-shadow: 0 0 8px rgba(255,  0,154,0.5);}
+       42% {color: #0000fd; !important text-shadow: 0 0 8px rgba(  0,  0,253,0.5);}
+       57% {color: #00e7d6; !important text-shadow: 0 0 8px rgba(  0,231,214,0.5);}
+       71% {color: #b0e700; !important text-shadow: 0 0 8px rgba(176,231,  0,0.5);}
+       100% {color: #f8be00; !important text-shadow: 0 0 8px rgba(248,190,  0,0.5);}
+    }
+  </style>
 
   {% include _partials/head.html %}
   <title>{{ title }}</title>
