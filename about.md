@@ -1,33 +1,42 @@
 ---
 layout: page
-title: About Monochrome
-description: This page describes monochrome.
+title: About Me
+description: This page describes me.
 ---
-## About
-Monochrome is a minimal, responsive theme created for Jekyll. The goal of Monochrome is to provide a ready to use, plug and play theme for those who want to set up a blog, and focus solely on the content.
+## sean9892
 
-## Features
+I'm Yubin Choi(최유빈), and an undergraduate student at KAIST.
 
-- Completely responsive and mobile first
-- Clean SEO friendly URLs, auto-generated from post title (no messy dates in the url)
-- SEO title/description integration
-- Sitemap ready
-- Easy customization for header, footer, navigation links, colors, favicon etc
-- Default Monochrome Color Palette - black, white, greys
+Currently I'm serving in ROK Air Force (2024.02.13-2025.11.12).
 
-### Setup
+## Education
 
-Monochrome may be installed by simply downloading the .zip folder from the [repository on Github](https://github.com/thereviewindex/monochrome/archive/master.zip).
+- **KAIST**
+    - B.S. in School of Computing (2022-Current)
+- **Chungbuk Science High School**
+    - an year early graduated (2020-2021)
 
-After extracting the content from the folder into the selected directory, you can type ``jekyll serve`` from the terminal, than open your browser to ``0.0.0.0:4000/monochrome/`` and you will find it there.
+## Competitions and Awards
+- Security Competitions (CTFs)
+    - **Whitehat Contest 2024 Soldier's Division** 1st place - Team *키보드워리어플랫폼*
+    - **2024 공군 정보통신경연대회** 2nd place
+    - **2024 국방사이버보안경진대회** 3rd place - Team *공CERT군*
+    - **2024 공군사이버전사경연대회** 3rd place
+    - **Whitehat Contest 2024 General Division** 4th place - Team *KAIST GoN*
+    - **2022 Crypto Analysis Contest** 1st place - Team *KAIST GoN*
+    - **HackTheon Sejong 2022** 4th place - Team *KaisTheon*
 
-Additionally it is possible to fork the repository and use Github Pages as hosting. By following this way it will be enough to change the ``baseurl`` value into the ``_config.yml`` file, with the directory name of your project (for example /blog) or simply with a "/" (slash) if you want install Monochrome in the root. 
+## Portfolio
+- **Challenge Author** for KAIST GoN Qual (2023-Current)
+    - **Verhältnis**: Solving HNP-2H to recover two small integers from their 2-hole masked ratio over the given finite field
+    - **Hoshimachi**: LFSR output prediction without solving for full states
+    - **Double Linear**: seed recovery on LFSR which adopts AES with a linear s-box as a filter function
+    - **Is it CRT-RSA?**: Factoring two RSA moduli with general solution for linear diophantine equation
+- **Challenge Author** for HSPACE Belluminar CTF
+    - **BabyHash**: topological sort to combine inversed hash values with rainbow-table attack on small plaintext space
+- **Student Instructor** at KAIST
+    - Humanity/Leadership III \<Hacking School\>
 
-
-
-For further details on Monochrome, please visit the [repository on Github](https://github.com/thereviewindex/monochrome/).
-
-![Monochrome](img/monochrome01.png "monochrome")
-
-
-
+## Extracurricular activities
+- Member of Cryptology Wargame Website **CryptoHack** (2020-Current)
+    - Solved *233/233* regular challenges, 41st 100%-cleared
