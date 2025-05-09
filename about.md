@@ -1,7 +1,7 @@
 ---
 layout: page
 title: About Me
-description: This page describes me.
+description: Simple Curriculum Vitae
 ---
 ## sean9892
 
