@@ -15,6 +15,7 @@ destination: ./_site
 permalink: pretty
 paginate: 8
 paginate_path: /page:num/
+lsi                 : false
 
 # Default values
 defaults:
@@ -37,3 +38,7 @@ version: "1.0.0"
 custom_header: true
 custom_nav_footer: false
 reverse: false
+
+# MathJax
+mathjax:
+  cdn: //cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML
