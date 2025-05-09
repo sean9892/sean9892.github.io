@@ -2,7 +2,7 @@
 layout: default
 ---
 <article id="post-page">
-	<h2>{%if page.header %}<strong>[{{ page.header }}]</strong>{% endif %}{{ page.title }} {%if page.lang %}({{page.lang}}){% endif %}</h2>
+	<h2>{%if page.header %}<strong>[{{ page.header }}] </strong>{% endif %}{{ page.title }} {%if page.lang %}<i>({{page.lang}})</i>{% endif %}</h2>
 	<time datetime="{{ page.date | date_to_xmlschema }}" class="by-line">{{ page.date | date_to_string }}</time>
 	<div class="content">
 
