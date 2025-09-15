@@ -1,8 +1,10 @@
 ---
 title: "Introduction and Proof for Tonelli-Shanks Algorithm"
 description: "bsgs"
-header: "Crypto"
-lang: ko
+categoris: [CTF,Algorithm]
+tag: [Crypto]
+math: true
+mermaid: false
 ---
 
 CTF Crypto task를 풀다 보면, 간혹 $m^2 \text{ mod }p$ 값으로부터 $m$의 값을 복원해야 하는 경우가 존재하며, 이때 사용할 수 있는 알고리즘이 Tonelli-Shanks Algorithm이다.

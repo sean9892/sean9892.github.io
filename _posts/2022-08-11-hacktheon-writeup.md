@@ -1,8 +1,11 @@
 ---
 title: "HackTheon 2022 Writeup"
 description: "HackTheon 2022 Writeup"
-header: "CTF"
-lang: ko
+author: sean9892
+categories: [CTF,writeup,HackTheon]
+tag: [CTF,writeup]
+math: true
+mermaid: false
 ---
 
 ![rank](/img/2022-hacktheon/rank.png)
