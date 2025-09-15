@@ -22,10 +22,6 @@ package-lock.json
 !.vscode/extensions.json
 !.vscode/tasks.json
 
-# vs-code
-.vscode
-.devcontainer
-
 # Misc
 _sass/vendors
 assets/js/dist

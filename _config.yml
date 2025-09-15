@@ -8,7 +8,7 @@ theme: jekyll-theme-chirpy
 # otherwise, the layout language will use the default value of 'en'.
 lang: ko-KR
 
-# Change to your timezone › https://zones.arilyn.cc
+# Change to your timezone › https://kevinnovak.github.io/Time-Zone-Picker
 timezone: Asia/Seoul
 
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
@@ -16,10 +16,10 @@ timezone: Asia/Seoul
 
 title: Archive # the main title
 
-tagline: Archive written by sean9892 # it will display as the subtitle
+tagline: Archived sean9892 # it will display as the subtitle
 
 description: >- # used by seo meta and the atom feed
-  sean9892 blog for tech posts
+  sean9892 tech blog
 
 # Fill in the protocol & hostname for your site.
 # E.g. 'https://username.github.io', note that it does not end with a '/'.
@@ -35,7 +35,7 @@ social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
   name: Yubin Choi
-  email: sean9892@gmail.com # change to your email address
+  email: sean9892@sean9892.com # change to your email address
   links:
     # The first element serves as the copyright owner's link
     - https://twitter.com/sean9892_ # change to your Twitter homepage
@@ -98,7 +98,7 @@ theme_mode: # [light | dark]
 cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar: "/commons/avatar.png"
+avatar: commons/avatar.png
 
 # The URL of the site-wide social preview image used in SEO `og:image` meta tag.
 # It can be overridden by a customized `page.image` in front matter.
