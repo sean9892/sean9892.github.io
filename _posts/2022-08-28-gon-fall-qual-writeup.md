@@ -1,8 +1,10 @@
 ---
 title: "2022 Fall GoN Qual CTF write-up"
 description: "2022 fall gon qual writeup"
-header: "CTF"
-lang: ko
+categories: [CTF,writeup,HackTheon]
+tag: [CTF]
+math: true
+mermaid: false
 ---
 
 KAIST의 정보보안 동아리인 GoN에서는 매 정규학기 초에 동아리 정규회원 자격 유지를 위한 Qual을 진행한다. GoN의 정규회원은 이에 의무적으로 참가해 학기차 별로 특정한 문제 수를 풀어야 하는데, 최근에는 드림핵에서 해당 Qual이 Open Contest 형태로 진행한다.

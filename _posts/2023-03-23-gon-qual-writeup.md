@@ -1,8 +1,10 @@
 ---
 title: "2023 GoN Spring Qual writeup"
 description: "2023 Spring GoN Qual"
-header: "CTF"
-lang: ko
+categories: [CTF,writeup,GoNQual]
+tag: [CTF,writeup]
+math: true
+mermaid: false
 ---
 
 사실 ctf를 참가하려 하면 막상 귀찮아 열심히 풀지 않는 경향이 있는데, 동아리 내부 퀄은 나름의 의무감을 핑계로 시간투자를 할 수 있어 공부하기에 괜찮은 시기인것 같다.

@@ -1,8 +1,10 @@
 ---
 title: "2025년 암호분석경진대회 write-up"
 description: "2025 cryptocontest"
-header: "crypto"
-lang: ko
+categories: [CTF,writeup,암호분석경진대회]
+tag: [CTF,writeup]
+math: true
+mermaid: false
 ---
 
 2025년도 암호분석경진대회에 참여했습니다. 2022년 최우수상 수상 이후로는 처음 참여하는데, 해가 지날 수록 대회 퀄리티가 개선되는 것 같아 참가 경험이 즐거웠던 것 같습니다.
