@@ -1,0 +1,26 @@
+title: Archive
+author: 최유빈
+email: sean9892@gmail.com
+url: https://sean9892.github.io
+baseurl: ""
+
+remote_theme: riggraz/no-style-please
+
+theme_config:
+  appearance: "dark"
+  back_home_text: ""
+  date_format: "%Y-%m-%d"
+  show_description: false
+
+sass:
+  style: :compressed
+
+plugins:
+- jekyll-feed
+- jekyll-seo-tag
+
+markdown: kramdown
+highlighter: rouge
+lsi: false
+excerpt_separator: "\n\n"
+incremental: false
