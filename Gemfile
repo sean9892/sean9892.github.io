@@ -5,4 +5,3 @@ gemspec
 
 gem "webrick"
 gem "kramdown-parser-gfm"
-gem "jektex"
