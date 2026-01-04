@@ -24,7 +24,7 @@ sass:
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
-  - kramdown-math-katex
+  - jektex
 
 markdown: kramdown
 highlighter: rouge
@@ -32,5 +32,5 @@ lsi: false
 excerpt_separator: "\n\n"
 incremental: false
 
-kramdown:
-  math_engine: "katex"
+jektex:
+  ignore: ["*.xml","README.md","_drafts/*"]

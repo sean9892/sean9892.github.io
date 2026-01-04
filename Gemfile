@@ -5,8 +5,4 @@ gemspec
 
 gem "webrick"
 gem "kramdown-parser-gfm"
-
-gem "duktape"
-gem "execjs"
-gem "katex"
-gem "kramdown-math-katex"
+gem "jektex"
