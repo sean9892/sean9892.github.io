@@ -24,6 +24,7 @@ sass:
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
+  - kramdown-math-katex
 
 markdown: kramdown
 highlighter: rouge
