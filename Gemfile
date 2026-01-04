@@ -5,3 +5,4 @@ gemspec
 
 gem "webrick"
 gem "kramdown-parser-gfm"
+gem "kramdown-math-katex"
