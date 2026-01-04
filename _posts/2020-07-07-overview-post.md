@@ -1,5 +1,7 @@
 ---
 layout: post
+category: test
+title: "TEST FOR THE NEW BLOG"
 ---
 
 Lorem ipsum[^1] dolor sit amet, consectetur adipiscing elit. Pellentesque vel lacinia neque. Praesent nulla quam, ullamcorper in sollicitudin ac, molestie sed justo. Cras aliquam, sapien id consectetur accumsan, augue magna faucibus ex, ut ultricies turpis tortor vel ante. In at rutrum tellus.
@@ -73,6 +75,14 @@ Now a table:
 ![theme logo](https://raw.githubusercontent.com/riggraz/no-style-please/master/logo.png){:.ioda}
 
 Logo of *no style, please!* theme[^4]
+
+## Math
+
+Here is an in-line expression: $e^{i\pi}+1=0$. Something like:
+
+$$
+\sum_{k=0}^{\infty}\frac{1}{k^2} \overset{=}{?} \cdots
+$$
 
 ---
 {: data-content="footnotes"}
