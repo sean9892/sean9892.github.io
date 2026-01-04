@@ -78,7 +78,7 @@ Logo of *no style, please!* theme[^4]
 
 ## Math
 
-Here is an in-line expression: $e^{i\pi}+1=0$. Something like:
+Here is an in-line expression: $$e^{i\pi}+1=0$$. Something like:
 
 $$
 \sum_{k=0}^{\infty}\frac{1}{k^2} \overset{=}{?} \cdots
