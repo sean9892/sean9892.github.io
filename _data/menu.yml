@@ -5,7 +5,7 @@ entries:
   - title: about me
     entries:
       - title: to be done
-        url: /
+        url: about
   - title: recent posts
     post_list:
       limit: 6
