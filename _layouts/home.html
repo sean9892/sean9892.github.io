@@ -1,11 +1,25 @@
 ---
 layout: default
 ---
+<style>
+  #banner {
+    height:150px;
+
+    background: url("{{site.favicon}}") 0 0;
+    background-size: cover;
+    background-position: center center;
+    filter: invert(100%);
+  }
+</style>
+
 <header>
+  <div id="banner"></div>
   <h1>{{ site.title }}</h1>
-  {% if site.theme_config.show_description == true %}
+  {%-if site.theme_config.show_description-%}
     <p>{{ site.description }}</p>
-  {% endif %}
+  {%-endif-%}
 </header>
 
-{% include menu_item.html collection=site.data.menu.entries %}
+{%-include menu_item.html collection=site.data.menu.entries-%}
+
+{{ content }}
