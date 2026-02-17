@@ -12,3 +12,7 @@ entries:
       show_more: true
       show_more_text: see archive...
       show_more_url: archive
+  - title: post protect
+    entries:
+      - title: post protect
+        url: protect

@@ -36,3 +36,8 @@ jektex:
     - ["\\Q", "\\mathbb{Q}"]
     - ["\\C", "\\mathbb{C}"]
     - ["\\F", "\\mathbb{F}"]
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  highlighter: rouge
