@@ -1,0 +1,63 @@
+---
+layout: page
+---
+
+<link rel="stylesheet" type="text/css" href="/assets/css/protect.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<h1>Post Protector</h1>
+
+<div id="encryptor">
+    <label for="plaintext">Plaintext</label>
+    <textarea id="plaintext" placeholder="Enter message..."></textarea>
+    <label for="password">Password</label>
+    <input id="password" type="password" placeholder="Enter password..." />
+
+    <button id="encryptBtn" type="button">Encrypt</button>
+
+    <label for="ciphertext">Ciphertext</label>
+    <textarea id="ciphertext" readonly placeholder="Ciphertext appears here..."></textarea>
+    <div class="meta" id="meta"></div>
+</div>
+<script>
+    const plaintextEl = document.getElementById("plaintext");
+    const passwordEl = document.getElementById("password");
+    const ciphertextEl = document.getElementById("ciphertext");
+    const metaEl = document.getElementById("meta");
+
+    document.getElementById("encryptBtn").addEventListener("click", () => {
+        const plaintext = plaintextEl.value;
+        const password = passwordEl.value;
+
+        if (!plaintext || !password) {
+        metaEl.textContent = "Please provide both plaintext and password.";
+        ciphertextEl.value = "";
+        return;
+        }
+
+        metaEl.textContent = "Encryption is now working...";
+
+        setTimeout(() => {
+        const salt = CryptoJS.lib.WordArray.random(16);
+        const iv = CryptoJS.lib.WordArray.random(16);
+
+        const key = CryptoJS.PBKDF2(password, salt, {
+            keySize: 256 / 32,
+            iterations: 100000,
+            hasher: CryptoJS.algo.SHA256
+        });
+
+        const encrypted = CryptoJS.AES.encrypt(plaintext, key, {
+            iv,
+            mode: CryptoJS.mode.CBC,
+            padding: CryptoJS.pad.Pkcs7
+        });
+
+        const combined = salt.clone().concat(iv).concat(encrypted.ciphertext);
+        const base64Ciphertext = CryptoJS.enc.Base64.stringify(combined);
+
+        ciphertextEl.value = base64Ciphertext;
+        metaEl.textContent = "Ciphertext generated successfully.";
+        }, 0);
+    });
+</script>
