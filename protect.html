@@ -7,7 +7,7 @@ layout: page
 
 <h1>Post Protector</h1>
 
-<div id="encryptor">
+<div id="encryptor" class="color-invert">
     <label for="plaintext">Plaintext</label>
     <textarea id="plaintext" placeholder="Enter message..."></textarea>
     <label for="password">Password</label>
@@ -21,13 +21,14 @@ layout: page
     <div class="meta" id="meta"></div>
 </div>
 <script>
+    const PROTECT_TOKEN = "{{site.protect_token | default: ''}}";
     const plaintextEl = document.getElementById("plaintext");
     const passwordEl = document.getElementById("password");
     const ciphertextEl = document.getElementById("ciphertext");
     const metaEl = document.getElementById("meta");
 
     document.getElementById("encryptBtn").addEventListener("click", () => {
-        const plaintext = plaintextEl.value;
+        const plaintext = plaintextEl.value + PROTECT_TOKEN;
         const password = passwordEl.value;
 
         if (!plaintext || !password) {

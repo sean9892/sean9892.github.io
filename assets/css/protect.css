@@ -7,7 +7,7 @@
     --border: #293244;
 }
 
-div#encryptor {
+.color-invert {
     filter: invert(100%);
 }
 
@@ -22,7 +22,6 @@ textarea,
 input,
 output {
     width: 100%;
-    border-radius: 10px;
     border: 1px solid var(--border);
     background: #0f141c;
     color: var(--text);
@@ -38,7 +37,6 @@ textarea {
 button {
     margin-top: 14px;
     border: 0;
-    border-radius: 10px;
     padding: 10px 14px;
     font: inherit;
     font-weight: 600;

@@ -1,0 +1,92 @@
+---
+layout: post
+---
+
+<link rel="stylesheet" type="text/css" href="/assets/css/protect.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+{% include mathjax.html %}
+
+<text id="ciphertext" style="display:none">{{content}}</text>
+
+<form id="pwInput" class="color-invert">
+    <input id="password" type="password" placeholder="Enter password..." />
+</form>
+
+<div id="plaintext" style="display:none;"></div>
+
+<script>
+    const ciphertextEl = document.getElementById("ciphertext");
+    const pwInput = document.getElementById("pwInput");
+    const passwordEl = document.getElementById("password");
+    const plaintextEl = document.getElementById("plaintext");
+
+    function renderPlaintext(plaintext){
+        plaintextEl.innerText = plaintext;
+
+        pwInput.style = "display:none;";
+        plaintextEl.style = "display:block;";
+
+        MathJax.Hub.Typeset([plaintextEl]);
+    }
+
+    pwInput.addEventListener("submit", (e)=>{
+        e.preventDefault();
+        console.log("input!");
+        
+        const PROTECT_TOKEN = "{{site.protect_token | default: ''}}";
+        const base64Ciphertext = ciphertextEl.innerText.trim();
+        const password = passwordEl.value;
+
+        if (!password) {
+            console.log("no password");
+            return;
+        }
+
+        try {
+        const combined = CryptoJS.enc.Base64.parse(base64Ciphertext);
+
+        if (combined.sigBytes <= 32) {
+            console.log("ciphertext too short");
+            return;
+        }
+
+        const salt = CryptoJS.lib.WordArray.create(combined.words.slice(0, 4), 16);
+        const iv = CryptoJS.lib.WordArray.create(combined.words.slice(4, 8), 16);
+        const rawCiphertext = CryptoJS.lib.WordArray.create(
+          combined.words.slice(8),
+          combined.sigBytes - 32
+        );
+
+        const key = CryptoJS.PBKDF2(password, salt, {
+          keySize: 256 / 32,
+          iterations: 100000,
+          hasher: CryptoJS.algo.SHA256
+        });
+
+        const decrypted = CryptoJS.AES.decrypt({ ciphertext: rawCiphertext }, key, {
+          iv,
+          mode: CryptoJS.mode.CBC,
+          padding: CryptoJS.pad.Pkcs7
+        });
+
+        const plaintext = CryptoJS.enc.Utf8.stringify(decrypted);
+
+        if (!plaintext) {
+            console.log("no plaintext");
+            return;
+        }
+
+        if (!plaintext.endsWith(PROTECT_TOKEN)) {
+            console.log("invalid protect token");
+            return;
+        }
+        
+        const rendertext = plaintext.slice(0,plaintext.length-PROTECT_TOKEN.length);
+        renderPlaintext(rendertext);
+      } catch (error) {
+        console.log(error);
+        return;
+      }
+    });
+</script>
