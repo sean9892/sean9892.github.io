@@ -14,6 +14,7 @@ layout: page
     <input id="password" type="password" placeholder="Enter password..." />
 
     <button id="encryptBtn" type="button">Encrypt</button>
+    <button id="copyBtn" type="button">Copy</button>
 
     <label for="ciphertext">Ciphertext</label>
     <textarea id="ciphertext" readonly placeholder="Ciphertext appears here..."></textarea>
@@ -59,5 +60,12 @@ layout: page
         ciphertextEl.value = base64Ciphertext;
         metaEl.textContent = "Ciphertext generated successfully.";
         }, 0);
+    });
+
+    document.getElementById("copyBtn").addEventListener("click", () => {
+        console.log(ciphertextEl.value);
+        window.navigator.clipboard.writeText(ciphertextEl.value).then(()=>{
+            metaEl.textContent = "Ciphertext copied.";
+        });
     });
 </script>
