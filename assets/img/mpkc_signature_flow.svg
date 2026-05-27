@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="550" viewBox="0 0 1100 550" role="img" aria-label="diagram">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#333"/>
+    </marker>
+    <style>
+      .title { font: 700 24px system-ui, -apple-system, Segoe UI, sans-serif; fill: #1f2937; }
+      .label { font: 600 15px system-ui, -apple-system, Segoe UI, sans-serif; fill: #111827; }
+      .small { font: 13px system-ui, -apple-system, Segoe UI, sans-serif; fill: #374151; }
+      .tiny { font: 12px system-ui, -apple-system, Segoe UI, sans-serif; fill: #4b5563; }
+      .box { fill: #f8fafc; stroke: #334155; stroke-width: 1.5; rx: 14; }
+      .accent { fill: #eef2ff; stroke: #4338ca; stroke-width: 1.5; rx: 14; }
+      .warn { fill: #fff7ed; stroke: #c2410c; stroke-width: 1.5; rx: 14; }
+      .ok { fill: #ecfdf5; stroke: #047857; stroke-width: 1.5; rx: 14; }
+      .muted { fill: #f1f5f9; stroke: #64748b; stroke-width: 1.2; rx: 14; }
+      .line { stroke: #333; stroke-width: 1.8; fill: none; marker-end: url(#arrow); }
+      .dash { stroke: #64748b; stroke-width: 1.5; stroke-dasharray: 5 4; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <rect x="0" y="0" width="1100" height="550" fill="#ffffff"/>
+
+  <text x="550" y="42" text-anchor="middle" class="title">Multivariate Signature Flow</text>
+  <rect x="70" y="105" width="160" height="75" class="box"/>
+  <text x="150" y="135" text-anchor="middle" class="label">Document</text>
+  <text x="150" y="153" text-anchor="middle" class="label">M</text>
+  <rect x="300" y="105" width="170" height="75" class="box"/>
+  <text x="385" y="135" text-anchor="middle" class="label">Hash / encode</text>
+  <text x="385" y="153" text-anchor="middle" class="label">d ∈ Fᵐ</text>
+  <rect x="545" y="90" width="180" height="105" class="warn"/>
+  <text x="635" y="124" text-anchor="middle" class="label">Invert P using</text>
+  <text x="635" y="142" text-anchor="middle" class="label">secret key</text>
+  <text x="635" y="160" text-anchor="middle" class="label">z = P⁻¹(d)</text>
+  <rect x="795" y="105" width="175" height="75" class="ok"/>
+  <text x="882" y="135" text-anchor="middle" class="label">Signature</text>
+  <text x="882" y="153" text-anchor="middle" class="label">z</text>
+  <path d="M 230 142 L 300 142" class="line"/>
+  <path d="M 470 142 L 545 142" class="line"/>
+  <path d="M 725 142 L 795 142" class="line"/>
+  <rect x="180" y="340" width="200" height="85" class="box"/>
+  <text x="280" y="372" text-anchor="middle" class="label">Verifier recomputes</text>
+  <text x="280" y="390" text-anchor="middle" class="label">P(z)</text>
+  <rect x="460" y="340" width="200" height="85" class="box"/>
+  <text x="560" y="372" text-anchor="middle" class="label">Compare with</text>
+  <text x="560" y="390" text-anchor="middle" class="label">encoded hash d</text>
+  <rect x="740" y="340" width="200" height="85" class="ok"/>
+  <text x="840" y="372" text-anchor="middle" class="label">Accept iff</text>
+  <text x="840" y="390" text-anchor="middle" class="label">P(z) = d</text>
+  <path d="M 380 382 L 460 382" class="line"/>
+  <path d="M 660 382 L 740 382" class="line"/>
+  <path d="M 882 185 L 280 340" class="dash"/>
+  <path d="M 385 185 L 560 340" class="dash"/>
+  <text x="550" y="515" text-anchor="middle" class="small">Verification is usually just public polynomial evaluation, which is why MPKC signatures can be attractive for constrained verifiers.</text>
+</svg>
