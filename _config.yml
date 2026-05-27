@@ -43,3 +43,8 @@ kramdown:
   highlighter: rouge
 
 protect_token: "[2daf0d58ed6eae36445b375cdb5e6520]"
+
+collections:
+  drafts:
+    output: true
+    permalink: /:collection/:slug/
