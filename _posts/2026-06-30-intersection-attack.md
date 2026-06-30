@@ -358,12 +358,12 @@ $$
 
 Here is a table for a few of the first ratio values.
 
-| $k$ | $r$ |
+| k | r |
 |-----|-----|
-| 2   | $3$ |
-| 3   | $\frac{5}{2}$ |
-| 4   | $\frac{7}{3}$ |
-| 5   | $\frac{9}{4}$ |
+| 2   | 3 |
+| 3   | 5/2 |
+| 4   | 7/3 |
+| 5   | 9/4 |
 
 Note that the ratio approaches to $2$. So we cannot increase the value of $k$ infinitely, as it fallbacks to the balanced case.
 
