@@ -63,7 +63,7 @@ $$
 
 So the bilinear information attached to \(Q_M\) is represented by \(M+M^T\).
 
-When the field characteristic \(\operatorname{char}(K)\) is not \(2\), we may replace \(M\( by the symmetric matrix \)\frac{M+M^T}{2}\) without changing th equadratic form. Equivalently, the skew-symmetric party of \(M\) does not contribute to \(x^TMx\).
+When the field characteristic \(\operatorname{char}(K)\) is not \(2\), we may replace \(M\) by the symmetric matrix \(\frac{M+M^T}{2}\) without changing th equadratic form. Equivalently, the skew-symmetric party of \(M\) does not contribute to \(x^TMx\).
 
 Since there's a critical attack on UOV-like schemes over an even characteristic called [wedge product attack](https://eprint.iacr.org/2025/1143.pdf), so we don't consider the even characteristic one in this post.
 
