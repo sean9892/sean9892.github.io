@@ -145,7 +145,7 @@ The standard UOV trapdoor view is precisely that the public quadratic map vanish
 
 ### Characteristic polynomial
 
-For a square matrix \(A\in K^{n	imes n}\), its characteristic polynomial is
+For a square matrix \(A\in K^{n	\times n}\), its characteristic polynomial is
 
 $$
     \chi_A(t)=\det(tI_n-A).
