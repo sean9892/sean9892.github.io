@@ -1,4 +1,3 @@
-````markdown
 ---
 layout: post
 slug: new-unsafe-primes
@@ -363,4 +362,3 @@ For each j in {j_D values in Table 1}:
     End For
 End For
 ```
-````
