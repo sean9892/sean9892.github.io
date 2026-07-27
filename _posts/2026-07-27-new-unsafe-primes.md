@@ -276,6 +276,8 @@ $$
     &=p+1-\operatorname{tr}(\pi)\\
 \end{align*}
 $$
+
+이는 증명하려던 명제이므로, 증명이 마무리되었습니다.
 </details>
 
 ---
