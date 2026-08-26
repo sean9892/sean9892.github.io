@@ -250,3 +250,7 @@ $$
 을 계산하여 \(p\)를 얻을 수 있습니다.
 
 모든 auxiliary prime \(m\)이 원하는 성질을 갖는 것은 아니므로, 알고리즘은 \(m\equiv1\pmod k\)인 prime들을 바꾸어 가며 같은 과정을 반복합니다. 논문은 Chebotarev density theorem을 사용하여 이러한 \(m\)이 충분히 자주 존재함을 보입니다. 즉 이 construction은 \(\Phi_k(p)\) 위수의 군을 직접 만드는 방식이 아니라, 공개된 정보만으로 계산 가능한 군을 만들고 \(\text{mod }p\)에서 그 action이 Frobenius map이 되는 경우를 찾는 방식으로 동작합니다.
+
+## Outro
+
+다음 글에서는 Factoring with Cyclotomic polynomials의 아이디어를 활용하는, 특수 케이스에서의 최적화를 소개하겠습니다.
