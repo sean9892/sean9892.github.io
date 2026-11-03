@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#e8edf5">
+  <title>Furry Sphere</title>
+  <style>
+    body { margin: 0; overflow: hidden; background: #e8edf5; }
+    canvas { position: fixed; inset: 0; width: 100%; height: 100%; cursor: grab; touch-action: none; }
+    canvas:active { cursor: grabbing; }
+  </style>
+</head>
+<body>
+  <canvas id="scene" tabindex="0" aria-label="Interactive 3D furry sphere. Drag or use arrow keys to rotate it."></canvas>
+  <script>
+    const canvas = document.querySelector('#scene');
+    const ctx = canvas.getContext('2d', { alpha: false });
+    const hairs = [];
+    const count = 8500;
+    const gold = Math.PI * (3 - Math.sqrt(5));
+    let seed = 7;
+    const random = () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296);
+    for (let i = 0; i < count; i++) {
+      const y = 1 - (i + .5) * 2 / count;
+      const a = i * gold;
+      const r = Math.sqrt(1 - y * y);
+      hairs.push({ x: Math.cos(a) * r, y, z: Math.sin(a) * r,
+        length: .17 + random() * .18, width: .65 + random() * .65,
+        shade: random(), px: 0, py: 0, pz: 0, vx: 0, vy: 0, vz: 0 });
+    }
+
+    let w, h, dpr, cx, cy, radius;
+    function resize() {
+      dpr = Math.min(devicePixelRatio || 1, 2);
+      w = innerWidth; h = innerHeight;
+      canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      cx = w * .5;
+      cy = h * .5;
+      radius = Math.min(w * .29, h * .29, 245);
+    }
+    addEventListener('resize', resize);
+    resize();
+
+    let yaw = -.25, pitch = -.17, yawSpeed = .18, pitchSpeed = 0;
+    let dragging = false, lastX = 0, lastY = 0, lastMove = 0;
+    canvas.addEventListener('pointerdown', e => {
+      dragging = true; lastX = e.clientX; lastY = e.clientY; lastMove = performance.now();
+      yawSpeed = pitchSpeed = 0; canvas.setPointerCapture(e.pointerId);
+    });
+    canvas.addEventListener('pointermove', e => {
+      if (!dragging) return;
+      const now = performance.now();
+      const dt = Math.max((now - lastMove) / 1000, 1 / 120);
+      const dx = (e.clientX - lastX) / Math.max(radius, 1);
+      const dy = (e.clientY - lastY) / Math.max(radius, 1);
+      yaw += dx * 1.25; pitch += dy * 1.25;
+      yawSpeed = Math.max(-8, Math.min(8, dx * 1.25 / dt));
+      pitchSpeed = Math.max(-8, Math.min(8, dy * 1.25 / dt));
+      lastX = e.clientX; lastY = e.clientY; lastMove = now;
+    });
+    const release = () => { dragging = false; };
+    canvas.addEventListener('pointerup', release);
+    canvas.addEventListener('pointercancel', release);
+    addEventListener('blur', release);
+    canvas.addEventListener('keydown', e => {
+      if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key)) return;
+      e.preventDefault();
+      if (e.key === 'ArrowLeft') yawSpeed = -2.5;
+      if (e.key === 'ArrowRight') yawSpeed = 2.5;
+      if (e.key === 'ArrowUp') pitchSpeed = -2.5;
+      if (e.key === 'ArrowDown') pitchSpeed = 2.5;
+    });
+
+    let previous = performance.now();
+    function frame(now) {
+      const dt = Math.min((now - previous) / 1000, .033);
+      previous = now;
+      if (!dragging) {
+        yaw += yawSpeed * dt; pitch += pitchSpeed * dt;
+        const drag = Math.exp(-2.3 * dt);
+        yawSpeed *= drag; pitchSpeed *= drag;
+      }
+      const cosy = Math.cos(yaw), siny = Math.sin(yaw);
+      const cosp = Math.cos(pitch), sinp = Math.sin(pitch);
+      for (const hair of hairs) {
+        const x = hair.x * cosy + hair.z * siny;
+        const z = hair.z * cosy - hair.x * siny;
+        const y = hair.y * cosp - z * sinp;
+        const rz = hair.y * sinp + z * cosp;
+        const length = Math.hypot(x, y - .38, rz);
+        const targetX = x + x / length * hair.length;
+        const targetY = y + (y - .38) / length * hair.length;
+        const targetZ = rz + rz / length * hair.length;
+        if (!hair.ready) {
+          hair.px = targetX; hair.py = targetY; hair.pz = targetZ; hair.ready = true;
+        }
+        // Damped springs let each tip lag behind the rotating root and settle under gravity.
+        hair.vx = (hair.vx + (targetX - hair.px) * 80 * dt) * Math.exp(-11 * dt);
+        hair.vy = (hair.vy + (targetY - hair.py) * 80 * dt) * Math.exp(-11 * dt);
+        hair.vz = (hair.vz + (targetZ - hair.pz) * 80 * dt) * Math.exp(-11 * dt);
+        hair.px += hair.vx * dt; hair.py += hair.vy * dt; hair.pz += hair.vz * dt;
+        const tipLength = Math.hypot(hair.px - x, hair.py - y, hair.pz - rz) || 1;
+        hair.px = x + (hair.px - x) * hair.length / tipLength;
+        hair.py = y + (hair.py - y) * hair.length / tipLength;
+        hair.pz = rz + (hair.pz - rz) * hair.length / tipLength;
+        const rootScale = 3.7 / (3.7 - rz);
+        const tipScale = 3.7 / (3.7 - hair.pz);
+        hair.rx = cx + x * radius * rootScale; hair.ry = cy - y * radius * rootScale;
+        hair.tx = cx + hair.px * radius * tipScale; hair.ty = cy - hair.py * radius * tipScale;
+        hair.depth = rz;
+        hair.light = Math.max(0, -.42 * x + .58 * y + .7 * rz);
+      }
+
+      ctx.fillStyle = '#e8edf5'; ctx.fillRect(0, 0, w, h);
+
+      function drawStrands(front) {
+        for (const hair of hairs) {
+          if ((hair.depth >= 0) !== front) continue;
+          const bright = hair.light;
+          const shade = hair.shade;
+          const red = Math.round(bright * 55 + shade * 8);
+          const green = Math.round(56 + bright * 68 + shade * 10);
+          const blue = Math.round(161 + bright * 74 + shade * 10);
+          ctx.strokeStyle = `rgba(${red},${green},${blue},${front ? .35 + bright * .4 : .52})`;
+          ctx.lineWidth = hair.width * (front ? 1 : .85);
+          ctx.beginPath(); ctx.moveTo(hair.rx, hair.ry); ctx.lineTo(hair.tx, hair.ty); ctx.stroke();
+        }
+      }
+      drawStrands(false);
+      const body = ctx.createRadialGradient(cx - radius * .37, cy - radius * .44, radius * .06, cx + radius * .18, cy + radius * .18, radius * 1.25);
+      body.addColorStop(0, '#30343c'); body.addColorStop(.34, '#171b23'); body.addColorStop(.68, '#090c12'); body.addColorStop(1, '#010204');
+      ctx.fillStyle = body; ctx.beginPath(); ctx.arc(cx, cy, radius, 0, Math.PI * 2); ctx.fill();
+      drawStrands(true);
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  </script>
+</body>
+</html>
