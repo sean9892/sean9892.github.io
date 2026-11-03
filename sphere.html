@@ -9,13 +9,39 @@
     body { margin: 0; overflow: hidden; background: #e8edf5; }
     canvas { position: fixed; inset: 0; width: 100%; height: 100%; cursor: grab; touch-action: none; }
     canvas:active { cursor: grabbing; }
+    .controls { position: fixed; z-index: 1; left: 50%; bottom: 20px; transform: translateX(-50%); width: min(800px, calc(100% - 32px)); display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; padding: 18px; border: 1px solid #ffffffaa; border-radius: 18px; background: #ffffffdd; box-shadow: 0 12px 40px #19254022; backdrop-filter: blur(12px); color: #202936; font: 12px system-ui, sans-serif; }
+    .controls label { display: grid; gap: 8px; min-width: 0; }
+    .controls label span { display: flex; justify-content: space-between; }
+    .controls input { width: 100%; margin: 0; accent-color: #0047ab; }
+    .controls input[type="color"] { height: 28px; padding: 0; border: 0; background: none; cursor: pointer; }
+    .controls input:focus-visible { outline: 2px solid #0047ab; outline-offset: 3px; }
+    .controls output { color: #667387; }
+    @media (max-width: 600px) { .controls { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 18px; padding: 14px; } }
   </style>
 </head>
 <body>
   <canvas id="scene" tabindex="0" aria-label="Interactive 3D furry sphere. Drag or use arrow keys to rotate it."></canvas>
+  <div class="controls" role="group" aria-label="Sphere controls">
+    <label>Fur color<input id="fur-color" type="color" value="#0047ab"></label>
+    <label>Sphere color<input id="sphere-color" type="color" value="#000000"></label>
+    <label><span>Fur length <output id="length-value">100%</output></span><input id="fur-length" type="range" min="40" max="200" value="100"></label>
+    <label><span>Thickness <output id="thickness-value">100%</output></span><input id="fur-thickness" type="range" min="40" max="250" value="100"></label>
+    <label><span>Flexibility <output id="flexibility-value">50%</output></span><input id="fur-flexibility" type="range" min="0" max="100" value="50"></label>
+  </div>
   <script>
     const canvas = document.querySelector('#scene');
     const ctx = canvas.getContext('2d', { alpha: false });
+    const color = hex => [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16));
+    const blend = (a, b, t) => `rgb(${a.map((n, i) => Math.round(n * (1 - t) + b[i] * t)).join(',')})`;
+    let furColor = color(document.querySelector('#fur-color').value);
+    let sphereColor = color(document.querySelector('#sphere-color').value);
+    let bodyColors;
+    function updateBodyColors() {
+      bodyColors = [blend(sphereColor, [210, 220, 235], .2), blend(sphereColor, [210, 220, 235], .08), blend(sphereColor, [0, 0, 0], .22), blend(sphereColor, [0, 0, 0], .55)];
+    }
+    updateBodyColors();
+    document.querySelector('#fur-color').addEventListener('input', e => { furColor = color(e.target.value); });
+    document.querySelector('#sphere-color').addEventListener('input', e => { sphereColor = color(e.target.value); updateBodyColors(); });
     const hairs = [];
     const count = 8500;
     const gold = Math.PI * (3 - Math.sqrt(5));
@@ -25,10 +51,26 @@
       const y = 1 - (i + .5) * 2 / count;
       const a = i * gold;
       const r = Math.sqrt(1 - y * y);
+      const length = .17 + random() * .18;
       hairs.push({ x: Math.cos(a) * r, y, z: Math.sin(a) * r,
-        length: .17 + random() * .18, width: .65 + random() * .65,
+        baseLength: length, length, width: .65 + random() * .65,
         shade: random(), px: 0, py: 0, pz: 0, vx: 0, vy: 0, vz: 0 });
     }
+    let thickness = 1;
+    let flexibility = .5;
+    document.querySelector('#fur-length').addEventListener('input', e => {
+      const scale = Number(e.target.value) / 100;
+      for (const hair of hairs) hair.length = hair.baseLength * scale;
+      document.querySelector('#length-value').textContent = `${e.target.value}%`;
+    });
+    document.querySelector('#fur-thickness').addEventListener('input', e => {
+      thickness = Number(e.target.value) / 100;
+      document.querySelector('#thickness-value').textContent = `${e.target.value}%`;
+    });
+    document.querySelector('#fur-flexibility').addEventListener('input', e => {
+      flexibility = Number(e.target.value) / 100;
+      document.querySelector('#flexibility-value').textContent = `${e.target.value}%`;
+    });
 
     let w, h, dpr, cx, cy, radius;
     function resize() {
@@ -84,6 +126,8 @@
       }
       const cosy = Math.cos(yaw), siny = Math.sin(yaw);
       const cosp = Math.cos(pitch), sinp = Math.sin(pitch);
+      const spring = 140 - flexibility * 110;
+      const damping = Math.exp(-(16 - flexibility * 12) * dt);
       for (const hair of hairs) {
         const x = hair.x * cosy + hair.z * siny;
         const z = hair.z * cosy - hair.x * siny;
@@ -97,9 +141,9 @@
           hair.px = targetX; hair.py = targetY; hair.pz = targetZ; hair.ready = true;
         }
         // Damped springs let each tip lag behind the rotating root and settle under gravity.
-        hair.vx = (hair.vx + (targetX - hair.px) * 80 * dt) * Math.exp(-11 * dt);
-        hair.vy = (hair.vy + (targetY - hair.py) * 80 * dt) * Math.exp(-11 * dt);
-        hair.vz = (hair.vz + (targetZ - hair.pz) * 80 * dt) * Math.exp(-11 * dt);
+        hair.vx = (hair.vx + (targetX - hair.px) * spring * dt) * damping;
+        hair.vy = (hair.vy + (targetY - hair.py) * spring * dt) * damping;
+        hair.vz = (hair.vz + (targetZ - hair.pz) * spring * dt) * damping;
         hair.px += hair.vx * dt; hair.py += hair.vy * dt; hair.pz += hair.vz * dt;
         const tipLength = Math.hypot(hair.px - x, hair.py - y, hair.pz - rz) || 1;
         hair.px = x + (hair.px - x) * hair.length / tipLength;
@@ -120,17 +164,18 @@
           if ((hair.depth >= 0) !== front) continue;
           const bright = hair.light;
           const shade = hair.shade;
-          const red = Math.round(bright * 55 + shade * 8);
-          const green = Math.round(56 + bright * 68 + shade * 10);
-          const blue = Math.round(161 + bright * 74 + shade * 10);
+          const tint = bright * .3 + shade * .04;
+          const red = Math.round(furColor[0] + (255 - furColor[0]) * tint);
+          const green = Math.round(furColor[1] + (255 - furColor[1]) * tint);
+          const blue = Math.round(furColor[2] + (255 - furColor[2]) * tint);
           ctx.strokeStyle = `rgba(${red},${green},${blue},${front ? .35 + bright * .4 : .52})`;
-          ctx.lineWidth = hair.width * (front ? 1 : .85);
+          ctx.lineWidth = hair.width * thickness * (front ? 1 : .85);
           ctx.beginPath(); ctx.moveTo(hair.rx, hair.ry); ctx.lineTo(hair.tx, hair.ty); ctx.stroke();
         }
       }
       drawStrands(false);
       const body = ctx.createRadialGradient(cx - radius * .37, cy - radius * .44, radius * .06, cx + radius * .18, cy + radius * .18, radius * 1.25);
-      body.addColorStop(0, '#30343c'); body.addColorStop(.34, '#171b23'); body.addColorStop(.68, '#090c12'); body.addColorStop(1, '#010204');
+      body.addColorStop(0, bodyColors[0]); body.addColorStop(.34, bodyColors[1]); body.addColorStop(.68, bodyColors[2]); body.addColorStop(1, bodyColors[3]);
       ctx.fillStyle = body; ctx.beginPath(); ctx.arc(cx, cy, radius, 0, Math.PI * 2); ctx.fill();
       drawStrands(true);
       requestAnimationFrame(frame);
